@@ -6,32 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <title>Schedule</title>
 </head>
 
 <body>
-    <div class="container-fluid main">
+    <div class="container-fluid main text-center">
         <div class="row">
-            <h1 class="blue mx-0">To/Do</h1>
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                <p>Task List</p>
-                <ul id="task-list">
-                </ul>
+            <div class="col-4">
+                <h1>To</h1>
             </div>
-            <div class="col-sm">
-                <form class="AddForm">
-                    <div class="form-group">
-                        <label for="task">Enter New Task</label>
-                        <input type="text" id="task">
-                        <input type="submit" value="Add Task" id="submitBtn">
+            <div class="col-4">
+                <form class="AddForm mt-3">
+                    <div class="form-group mb-3">
+                        <input type="text" id="task" aria-label="add task" placeholder="Add New Task">
+                        <button type="submit" id="submitBtn">Add Task</button>
                     </div>
                 </form>
+            </div>
+            <div class="col-4">
+                <h1>Do</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col border border-dark border-1">
+                <ul id="task-list" class="list-group">
+                </ul>
             </div>
         </div>
     </div>
