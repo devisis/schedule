@@ -1,7 +1,7 @@
 const taskList = document.querySelector("#task-list");
 const task = document.querySelector("#task");
 
-addEventListener('submit', function (event) {
+document.querySelector('.add-form').addEventListener('submit', function (event) {
     event.preventDefault();
 
     //Access form data
@@ -15,11 +15,19 @@ addEventListener('submit', function (event) {
 
     //Create new task item
     const taskItem = document.createElement('li');
-    taskItem.setAttribute('class', 'taskContainer d-flex justify-content-between align-items-center')
+    taskItem.setAttribute('class', 'task-container d-flex justify-content-between align-items-center')
 
-    taskItem.textContent = newTask;
+    //Create task text container 
+    const taskTextbox = document.createElement('span');
+    taskTextbox.textContent = newTask;
+    taskItem.appendChild(taskTextbox);
 
-    //Post task to task list
+    // Create a wrapper for buttons
+    const btnWrapper = document.createElement('div');
+    btnWrapper.setAttribute('class', 'd-flex');
+
+
+    //Append task to task list
     taskList.appendChild(taskItem);
 
     //Create new delete button
@@ -31,22 +39,50 @@ addEventListener('submit', function (event) {
         taskList.removeChild(taskItem)
     });
 
-    //Append delete button to list item
-    taskItem.appendChild(deleteItem);
+    //Append delete button to buttons container
+    btnWrapper.appendChild(deleteItem);
 
     //Create new update button
-    let updateButtons = document.querySelectorAll('.update-btn')
     const updateItem = document.createElement('button');
-    updateItem.setAttribute('class', 'update-btn')
+    updateItem.setAttribute('class', 'update-btn mr-3')
     updateItem.textContent = 'edit';
     updateItem.addEventListener('click', () => {
-        // update  task item  when update button is pressed
-        
-        updateItem.textContent = 'update';
+        //Check the button is on edit
+        if (updateItem.textContent === 'edit') {
+            // Create and pre-fill input field with current task text
+            let input = document.createElement('input');
+            input.type = 'text';
+            taskTextbox.textContent = updatedTaskText;  //trim the white spaces
+
+            // Insert  input field before the buttons wrapper
+            taskItem.insertBefore(input, btnWrapper);
+
+            // Change the button text to 'update'
+            updateItem.textContent = 'update';
+        }
+        else if (updateItem.textContent === 'update') {
+            // Get updated task text from input field
+            let updatedTaskText = taskItem.querySelector('input').value;
+
+            // Remove input field
+            taskItem.removeChild(taskItem.querySelector('input'));
+
+            // Update the task item's text with the updated task text
+            taskTextbox.textContent = updatedTaskText;
+
+            // Append the buttons wrapper back into the task item
+            taskItem.appendChild(btnWrapper);
+
+            // Change the button text back to 'edit'
+            updateItem.textContent = 'edit';
+        }
     });
 
-    //Append delete button to list item
-    taskItem.appendChild(updateItem);
+    //Append update button to buttons container
+    btnWrapper.appendChild(updateItem);
+
+    // Append button container to task item
+    taskItem.appendChild(btnWrapper);
 
 
     //Clear input box
