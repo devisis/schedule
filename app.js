@@ -26,22 +26,6 @@ document.querySelector('.add-form').addEventListener('submit', function (event) 
     const btnWrapper = document.createElement('div');
     btnWrapper.setAttribute('class', 'd-flex');
 
-
-    //Append task to task list
-    taskList.appendChild(taskItem);
-
-    //Create new delete button
-    const deleteItem = document.createElement('button');
-    deleteItem.setAttribute('class', 'delete-btn')
-    deleteItem.textContent = 'delete';
-    deleteItem.addEventListener('click', () => {
-        // Remove  task item  when delete button is pressed
-        taskList.removeChild(taskItem)
-    });
-
-    //Append delete button to buttons container
-    btnWrapper.appendChild(deleteItem);
-
     //Create new update button
     const updateItem = document.createElement('button');
     updateItem.setAttribute('class', 'update-btn mr-3')
@@ -52,7 +36,7 @@ document.querySelector('.add-form').addEventListener('submit', function (event) 
             // Create and pre-fill input field with current task text
             let input = document.createElement('input');
             input.type = 'text';
-            taskTextbox.textContent = updatedTaskText;  //trim the white spaces
+            taskTextbox.textContent = newTask;
 
             // Insert  input field before the buttons wrapper
             taskItem.insertBefore(input, btnWrapper);
@@ -78,12 +62,26 @@ document.querySelector('.add-form').addEventListener('submit', function (event) 
         }
     });
 
-    //Append update button to buttons container
-    btnWrapper.appendChild(updateItem);
+    //Create new delete button
+    const deleteItem = document.createElement('button');
+    deleteItem.setAttribute('class', 'delete-btn')
+    deleteItem.textContent = 'delete';
+    deleteItem.addEventListener('click', () => {
+        // Remove  task item  when delete button is pressed
+        taskList.removeChild(taskItem)
+    });
 
-    // Append button container to task item
+    //Append task to task list
+    taskList.appendChild(taskItem);
+
+    //Append button container to task item
     taskItem.appendChild(btnWrapper);
 
+    //Append delete button to buttons container
+    btnWrapper.appendChild(deleteItem);
+
+    //Append update button to buttons container
+    btnWrapper.appendChild(updateItem);
 
     //Clear input box
     task.value = '';
